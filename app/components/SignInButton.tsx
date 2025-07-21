@@ -1,20 +1,19 @@
 'use client'
-import { useRouter } from "next/navigation";
+
 import { PiSignInBold } from "react-icons/pi";
 import styles from "./SignInButton.module.css";
 import { generateSecureState } from "../utils/auth";
 
 export default function SignInButton() {
 
-  const clientURL = process.env.CLIENT_URL;
-  const router = useRouter();
+  const clientURL = process.env.NEXT_PUBLIC_CLIENT_URL;
 
   const handleSignIn = () => {
     const state = generateSecureState();
-    sessionStorage.setItem('state', state);
+    window.sessionStorage.setItem('state', state);
 
     const redirectUri = `${clientURL}/auth`;
-    const clientId = process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || '';
+    const clientId = process.env.NEXT_PUBLIC_NAVER_AUTH_CLIENT_ID || '';
     const responseType = 'code';
 
     const url = new URL('https://nid.naver.com/oauth2.0/authorize');
