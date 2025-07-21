@@ -6,10 +6,20 @@ import SidePanel from "./components/SidePanel";
 import DefaultPanel from "./components/DefaultPanel";
 import EventPanel from "./components/EventPanel";
 import { usePanelContext } from "./contexts/PanelContext";
+import { useEventsContext } from "./contexts/EventsContext";
+import MyPageButton from "./components/MyPageButton";
+import AddEventButton from "./components/AddEventButton";
+import { useEffect, useState } from "react";
 
 export default function Home() {
 
   const { panelContent } = usePanelContext()
+  const { setEvents, events } = useEventsContext()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    setIsLoggedIn(!!sessionStorage.getItem('token'))
+  }, [])
 
   return (
     <div className={styles.page}>
@@ -17,7 +27,8 @@ export default function Home() {
       <SidePanel>
         { panelContent === 0 ? <DefaultPanel /> : <EventPanel /> }
       </SidePanel>
-      <SignInButton />
+      <AddEventButton />
+      {isLoggedIn ? <MyPageButton /> : <SignInButton />}
       <NaverMap />
     </div>
   );

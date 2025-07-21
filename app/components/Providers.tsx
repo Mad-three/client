@@ -1,6 +1,7 @@
 'use client'
 
 import { PanelProvider } from '../contexts/PanelContext'
+import { EventsProvider } from '../contexts/EventsContext'
 
 interface ProvidersProps {
   children: React.ReactNode
@@ -9,7 +10,9 @@ interface ProvidersProps {
 export default function Providers({ children }: ProvidersProps) {
   return (
     <PanelProvider>
-      {children}
+      <EventsProvider>
+        {children}
+      </EventsProvider>
     </PanelProvider>
   )
 } 
