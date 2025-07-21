@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import Providers from "./components/Providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,7 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        {/* 네이버 지도 API 스크립트 로드 */}
+        <Script
+          src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}`}
+          strategy="beforeInteractive"
+        />
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

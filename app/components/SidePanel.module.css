@@ -1,0 +1,136 @@
+/* 사이드 패널 컨테이너 */
+.panel {
+  position: fixed;
+  top: 0;
+  width: var(--panel-width, 300px);
+  height: 100vh;
+  background-color: #ffffff;
+  transition: left 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  z-index: 1000;
+  border: 1px solid #e0e0e0;
+  border-left: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel.closed {
+  left: calc(var(--panel-width, 300px) * -1);
+  box-shadow: none;
+}
+
+.panel.open {
+  left: 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 패널 헤더 */
+.header {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 닫기 버튼 */
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: #e9ecef;
+}
+
+/* 패널 콘텐츠 */
+.content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: #fff;
+}
+
+.emptyContent {
+  color: #666;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.exampleBox {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.exampleTitle {
+  margin: 0 0 0.5rem 0;
+  font-size: 14px;
+}
+
+.exampleCode {
+  font-size: 12px;
+  color: #666;
+  overflow: auto;
+  margin: 0;
+}
+
+/* 토글 버튼 */
+.toggleButton {
+  position: fixed;
+  top: 50vh;
+  width: 25px;
+  height: 50px;
+  background-color: white;
+  color: #353535;
+  border: 1px solid #e0e0e0;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  font-size: 18px;
+  transition: left 0.3s ease-in-out;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggleButton.closed {
+  left: 0;
+}
+
+.toggleButton.open {
+  left: var(--panel-width, 300px);
+}
+
+/* 토글 버튼 아이콘 */
+.toggleIcon {
+  transition: transform 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+.toggleButton.closed .toggleIcon {
+  transform: rotate(180deg);
+}
+
+.toggleButton.open .toggleIcon {
+  transform: rotate(0deg);
+} 

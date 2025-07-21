@@ -1,0 +1,37 @@
+{
+    "events": [
+        {
+            "id": 1,
+            "name": "Event 1",
+            "description": "Description 1",
+            "location": "Location 1",
+            "latitude": 37.36,
+            "longitude": 127.11,
+            "category": "Category 1",
+            "startDate": "2025-01-01",
+            "endDate": "2025-01-02"
+        },
+        {
+            "id": 2,
+            "name": "Event 2",
+            "description": "Description 2",
+            "location": "Location 2",
+            "latitude": 37.37,
+            "longitude": 127.12,
+            "category": "Category 2",
+            "startDate": "2025-01-01",
+            "endDate": "2025-01-02"
+        },
+        {
+            "id": 3,
+            "name": "Event 3",
+            "description": "Description 3",
+            "location": "Location 3",
+            "latitude": 37.38,
+            "longitude": 127.11,
+            "category": "Category 3",
+            "startDate": "2025-01-01",
+            "endDate": "2025-01-02"
+        }
+    ]
+}
