@@ -38,7 +38,6 @@ export default function ReviewForm({ eventId, onSubmit, onCancel }: ReviewFormPr
 
       if (response.ok) {
         alert('리뷰가 성공적으로 작성되었습니다!')
-        console.log(response)
         onSubmit()
       } else {
         alert('리뷰 작성에 실패했습니다.')

@@ -187,17 +187,6 @@ export default function AddEventPage() {
         submitData.append('imageUrl', formData.image)
       }
 
-      // API 호출 (임시로 console.log)
-      console.log('이벤트 데이터:', {
-        title: formData.title,
-        description: formData.description,
-        startAt: formatDate(formData.startAt),
-        endAt: formatDate(formData.endAt),
-        location: formData.location,
-        category: selectedCategories,
-        image: formData.image?.name
-      })
-
       const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/events`, {
         method: 'POST',
         headers: {

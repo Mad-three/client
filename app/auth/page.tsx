@@ -26,7 +26,6 @@ function AuthContent() {
 
     const originalState = sessionStorage.getItem('state') || '';
     sessionStorage.removeItem('state');
-    console.log('originalState', originalState);
 
     if (!validateState(state, originalState)) {
       alert('Invalid state');
@@ -38,7 +37,6 @@ function AuthContent() {
 
     const handleCallback = async () => {
     try {
-        console.log(code, state);
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/naver/callback`, {
         method: 'POST',
           headers: {

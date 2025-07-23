@@ -22,7 +22,6 @@ export default function NaverMap() {
           }
         })
         const data = await response.json()
-        console.log('data', data)
         const fetchedEvents: Event[] = data.map((e: Event) => ({  
             ...e,
             isLiked: e.isLiked || false
@@ -40,11 +39,9 @@ export default function NaverMap() {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const currentPosition: naver.maps.LatLng = new naver.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            console.log('currentPosition', currentPosition)
             setCenter(currentPosition)
           },
           (error) => {
-            console.error('Error getting current location:', error)
             setCenter(null)
           }
         );

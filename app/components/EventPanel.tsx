@@ -76,9 +76,8 @@ export default function EventPanel() {
             if (response.status === 201) {
                 alert('캘린더에 추가되었습니다.')
             } else {
-                alert('캘린더에 추가에 실패했습니다.')
+                alert('캘린더 추가에 실패했습니다.')
             }
-            console.log(response)
         } else {
             alert('로그인 후 이용해주세요.');
         }
