@@ -386,7 +386,7 @@ export default function AddEventPage() {
             type="submit"
             disabled={isSubmitting}
             className={styles.submitButton}
-            onClick={() => handleSubmit}
+            onClick={handleSubmit}
           >
             {isSubmitting ? '생성 중...' : '이벤트 생성'}
           </button>

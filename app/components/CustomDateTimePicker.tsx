@@ -108,6 +108,7 @@ export default function CustomDateTimePicker({
           {/* 월 네비게이션 */}
           <div className={styles.header}>
             <button 
+              type="button"
               onClick={() => {
                 const newDate = new Date(selectedDate)
                 newDate.setMonth(newDate.getMonth() - 1)
@@ -121,6 +122,7 @@ export default function CustomDateTimePicker({
               {selectedDate.getFullYear()}년 {selectedDate.getMonth() + 1}월
             </span>
             <button 
+              type="button"
               onClick={() => {
                 const newDate = new Date(selectedDate)
                 newDate.setMonth(newDate.getMonth() + 1)
@@ -144,6 +146,7 @@ export default function CustomDateTimePicker({
             {generateCalendarDays().map((date, index) => (
               <button
                 key={index}
+                type="button"
                 className={`${styles.day} ${
                   !isCurrentMonth(date) ? styles.otherMonth : ''
                 } ${isSelected(date) ? styles.selected : ''} ${
@@ -171,6 +174,7 @@ export default function CustomDateTimePicker({
           {/* 확인 버튼 */}
           <div className={styles.actions}>
             <button 
+              type="button"
               onClick={() => setIsOpen(false)}
               className={styles.confirmButton}
             >
