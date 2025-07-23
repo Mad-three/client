@@ -17,16 +17,23 @@ export default function DefaultPanel() {
 
   // 검색 실행 함수
   const executeSearch = async () => {
-    if (searchQuery.trim()) {
-      const query = searchQuery.trim()
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/search/events?query=${query}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
+    const query = searchQuery.trim()
+    if (query) {
+      try {
+        console.log('searchQuery:', query)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/search?query=${query}`, {
+          method: 'GET',
+        })
+        if (response.ok) {
+          const data = await response.json()
+          console.log(data)
+        } else {
+          const data = await response.json()
+          console.log(data)
         }
-      })
-      const data = await response.json()
-      console.log(data)
+      } catch (error) {
+        console.error('검색 중 오류 발생:', error)
+      }
     } else {
       console.log('검색어가 입력되지 않았습니다.')
     }
