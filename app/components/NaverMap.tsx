@@ -6,7 +6,7 @@ import { useEventsContext, Event } from '../contexts/EventsContext'
 
 export default function NaverMap() {
   const mapRef = useRef<HTMLDivElement>(null)
-  const { openPanel } = usePanelContext()
+  const { openPanel, panelContent } = usePanelContext()
   const { setEvents, events, selectedCategories, selectedStates } = useEventsContext()
   const [naverMap, setNaverMap] = useState<naver.maps.Map | null>(null)
   const [markers, setMarkers] = useState<naver.maps.Marker[]>([])
@@ -116,6 +116,21 @@ export default function NaverMap() {
       }
     })
   }, [selectedCategories, selectedStates, events, markers, naverMap])
+
+  useEffect(() => {
+    if (panelContent) {
+      const marker = markers.find(m => m.getTitle() === panelContent.toString())
+      if (marker) {
+        marker.setMap(naverMap)
+        const latLng = marker.getPosition()
+        const lat = latLng?.x
+        const lng = latLng?.y
+        if (lat && lng) {
+          naverMap?.panTo(new naver.maps.Point(lat - 0.0012, lng))
+        }
+      }
+    }
+  }, [panelContent, markers, naverMap])
 
   return (
     <div ref={mapRef} style={{ width: '100%', height: '100%' }}>
