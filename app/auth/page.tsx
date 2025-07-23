@@ -12,7 +12,7 @@ export default function Auth() {
   const state = searchParams.get('state') || '';
   
   useEffect(() => {
-    const originalState = sessionStorage.getItem('state') || '';
+  const originalState = sessionStorage.getItem('state') || '';
     sessionStorage.removeItem('state');
     console.log('originalState', originalState);
 
@@ -25,37 +25,37 @@ export default function Auth() {
     setIsValid(true);
 
     const handleCallback = async () => {
-      try {
+    try {
         console.log(code, state);
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/naver/callback`, {
-          method: 'POST',
+        method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ code, state }),
+        body: JSON.stringify({ code, state }),
         });
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const data = await response.json();
-        const token = data.token;
-        const user = data.user;
+      const data = await response.json();
+      const token = data.token;
+      const user = data.user;
         
-        if (token && user) {
-          sessionStorage.setItem('token', token);
-          sessionStorage.setItem('userId', user.userId);
+      if (token && user) {
+        window.sessionStorage.setItem('token', token);
+        window.sessionStorage.setItem('userId', user.userId.toString());
         } else {
           throw new Error('Invalid response data');
         }
-      } catch (error) {
+    } catch (error) {
         console.error('Login error:', error);
         alert(error instanceof Error ? error.message : 'An unknown error occurred');
-      } finally {
-        router.replace('/');
-      }
+    } finally {
+    router.replace('/');
     }
+  }
 
     handleCallback();
   }, [router]);

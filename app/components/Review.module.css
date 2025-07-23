@@ -1,0 +1,63 @@
+/* 리뷰 카드 */
+.reviewCard {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #e1e5e9;
+  transition: box-shadow 0.2s;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.reviewAuthor {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.authorName {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.reviewDate {
+  font-size: 12px;
+  color: #666;
+}
+
+.reviewRating {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  font-size: 12px;
+}
+
+.reviewContent {
+  line-height: 1.5;
+  color: #555;
+}
+
+.reviewContent p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .reviewHeader {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .reviewRating {
+    align-self: flex-end;
+  }
+}
+

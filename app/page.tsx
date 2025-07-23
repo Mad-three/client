@@ -14,11 +14,32 @@ import { useEffect, useState } from "react";
 export default function Home() {
 
   const { panelContent } = usePanelContext()
-  const { setEvents, events } = useEventsContext()
+  const { setCategories } = useEventsContext()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
-    setIsLoggedIn(!!sessionStorage.getItem('token'))
+    setIsLoggedIn(!!window.sessionStorage.getItem('token'))
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/categories`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
+        const data = await response.json()
+        console.log(data)
+        const categories = data.map((c: any) => ({
+          categoryId: c.categoryId,
+          name: c.name
+        }))
+        setCategories(categories)
+        console.log('categories', categories)
+      } catch (error) {
+        console.error('Error fetching categories:', error)
+      }
+    }
+    fetchCategories()
   }, [])
 
   return (

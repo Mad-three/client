@@ -1,0 +1,628 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.cancelButton {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #666;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.input,
+.textarea,
+.select {
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+  background-color: #ffffff;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+}
+
+.input.error,
+.textarea.error,
+.select.error {
+  border-color: #F16767;
+}
+
+.textarea {
+  resize: none;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.select {
+  cursor: pointer;
+}
+
+.dateRow {
+  display: flex;
+  gap: 16px;
+}
+
+.dateField {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.categoryRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+}
+
+.checkboxLabel.error {
+  border-color: #F16767;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #F16767;
+}
+
+.checkbox.error {
+  border: 2px solid #F16767;
+}
+
+.checkboxText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  user-select: none;
+}
+
+.locationInputWrapper {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+}
+
+.locationInputWrapper.error {
+  border-color: #F16767;
+}
+
+.locationInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.searchIconButton {
+  background: none;
+  border: none;
+  font-size: 16px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fileInput {
+  padding: 12px;
+  border: 2px dashed #e1e5e9;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.fileInput:hover {
+  border-color: #FFA7A7;
+}
+
+.fileInput::-webkit-file-upload-button {
+  background: #F16767;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 12px;
+  font-size: 14px;
+}
+
+.fileInput::-webkit-file-upload-button:hover {
+  background: #F16767;
+}
+
+.imageUploadPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+}
+
+.previewRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.previewContainer {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #e1e5e9;
+}
+
+.uploadPreviewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hiddenFileInput {
+  display: none;
+}
+
+.imageInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80px;
+  gap: 8px;
+  flex: 1;
+  min-width: 0; /* 텍스트 오버플로우 방지 */
+}
+
+.imageName {
+  margin: 0;
+  color: #495057;
+  font-size: 14px;
+  font-weight: 500;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.imageSize {
+  margin: 0;
+  color: #6c757d;
+  font-size: 12px;
+}
+
+.changeImageButton {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.changeImageButton:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+
+.removeImageButton {
+  border: none;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.submitButton {
+  background-color: #F16767;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 160px;
+}
+
+.submitButton:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .form {
+    gap: 20px;
+  }
+
+  .input,
+  .textarea,
+  .select {
+    padding: 10px 14px;
+    font-size: 16px; /* 모바일에서 zoom 방지 */
+  }
+
+  .submitButton {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .dateRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .categoryRow {
+    gap: 12px;
+  }
+
+  .checkboxLabel {
+    padding: 10px 12px;
+    font-size: 16px; /* 모바일에서 터치하기 쉽게 */
+  }
+
+  .searchIconButton {
+    padding: 10px; /* 모바일에서 터치하기 쉽게 */
+    font-size: 18px;
+  }
+
+  .imageUploadPreview {
+    gap: 16px;
+  }
+
+  .previewRow {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .previewContainer {
+    width: 120px;
+    height: 120px;
+  }
+
+  .removeImageButton {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .changeImageButton {
+    padding: 12px 20px;
+    font-size: 16px;
+    align-self: center;
+  }
+
+  .imageName {
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .header h1 {
+    color: #ffffff;
+  }
+
+  .input,
+  .textarea,
+  .select {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #ffffff;
+  }
+
+  .input:focus,
+  .textarea:focus,
+  .select:focus {
+    border-color: #F16767;
+  }
+
+  .fileInput {
+    background-color: #2d2d2d;
+    border-color: #404040;
+  }
+
+  .fileInput:hover {
+    background-color: #3d3d3d;
+  }
+
+  .imagePreview {
+    background-color: #2d2d2d;
+    border-color: #404040;
+  }
+
+  .imagePreview p {
+    color: #cccccc;
+  }
+
+  .label {
+    color: #ffffff;
+  }
+
+  .checkboxLabel {
+    background-color: #2d2d2d;
+    border-color: #404040;
+  }
+
+  .checkboxLabel:hover {
+    background-color: #3d3d3d;
+  }
+
+  .checkboxText {
+    color: #ffffff;
+  }
+  
+  .previewContainer {
+    border-color: #404040;
+  }
+
+  .imageName {
+    color: #ffffff;
+  }
+
+  .imageSize {
+    color: #cccccc;
+  }
+
+  .changeImageButton {
+    background: #5a6268;
+  }
+
+  .changeImageButton:hover {
+    background: #495057;
+  }
+
+  .removeImageButton {
+    background: rgba(220, 53, 69, 0.95);
+  }
+
+  .removeImageButton:hover {
+    background: rgba(200, 35, 51, 1);
+  }
+}
+
+/* 위치 검색 오버레이 스타일 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.overlayContent {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.overlayHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.overlayHeader h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover {
+  background-color: #f5f5f5;
+}
+
+.locationList {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.locationItem {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.locationItem:hover {
+  background-color: #f8f9fa;
+}
+
+.locationItem:last-child {
+  border-bottom: none;
+}
+
+.locationName {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.locationDetail {
+  font-size: 12px;
+  color: #666;
+}
+
+.locationDetail span {
+  display: block;
+  margin-top: 2px;
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .overlayContent {
+    background: #1a1a1a;
+    color: #fff;
+  }
+
+  .overlayHeader {
+    border-bottom-color: #333;
+  }
+
+  .overlayHeader h3 {
+    color: #fff;
+  }
+
+  .closeButton {
+    color: #ccc;
+  }
+
+  .closeButton:hover {
+    background-color: #333;
+  }
+
+  .locationItem {
+    border-bottom-color: #333;
+  }
+
+  .locationItem:hover {
+    background-color: #2a2a2a;
+  }
+
+  .locationName {
+    color: #fff;
+  }
+
+  .locationDetail {
+    color: #ccc;
+  }
+} 

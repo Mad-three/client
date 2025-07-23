@@ -1,0 +1,252 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  font-size: 16px;
+}
+
+.input.error {
+  border-color: #F16767;
+}
+
+.displayValue {
+  color: #333;
+}
+
+.calendarIcon {
+  font-size: 18px;
+  color: #666;
+}
+
+.picker {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  margin-top: 4px;
+  padding: 16px;
+  min-width: 300px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.navButton:hover {
+  background-color: #f0f0f0;
+}
+
+.monthYear {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #666;
+  padding: 8px 4px;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.day:hover:not(:disabled) {
+  background-color: #f0f0f0;
+}
+
+.day.selected {
+  background-color: #F16767;
+  color: white;
+}
+
+.day.today {
+  background-color: #F5F5F5;
+  color: #F16767;
+  font-weight: 600;
+}
+
+.day.otherMonth {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.day.otherMonth:hover {
+  background: none;
+}
+
+.timeSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background-color: #F5F5F5;
+  border-radius: 6px;
+}
+
+.timeLabel {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.timeInput {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background: white;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.confirmButton {
+  background-color: #F16767;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .picker {
+    min-width: 280px;
+    padding: 12px;
+  }
+
+  .day {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .navButton {
+    padding: 12px;
+    font-size: 24px;
+  }
+
+  .timeInput {
+    padding: 10px;
+    font-size: 16px;
+  }
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .input {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #ffffff;
+  }
+
+  .displayValue {
+    color: #ffffff;
+  }
+
+  .picker {
+    background-color: #2d2d2d;
+    border-color: #404040;
+  }
+
+  .monthYear {
+    color: #ffffff;
+  }
+
+  .weekday {
+    color: #cccccc;
+  }
+
+  .day {
+    color: #ffffff;
+  }
+
+  .day:hover:not(:disabled) {
+    background-color: #3d3d3d;
+  }
+
+  .day.today {
+    background-color: #1a3a5f;
+    color: #4fc3f7;
+  }
+
+  .timeSection {
+    background-color: #3d3d3d;
+  }
+
+  .timeLabel {
+    color: #ffffff;
+  }
+
+  .timeInput {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #ffffff;
+  }
+
+  .navButton:hover {
+    background-color: #3d3d3d;
+  }
+} 

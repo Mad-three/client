@@ -6,10 +6,11 @@ export interface Event {
   eventId: number
   title: string
   startAt: string
+  endAt: string
   latitude: number
   longitude: number
   isLiked: boolean
-  categories: Category[]
+  Categories: Category[]
   authorId: number
 }
 
@@ -39,7 +40,7 @@ export interface Review {
   reviewId: number
   content: string
   createdAt: string
-  author: User
+  User: User
   rating: number
 }
 

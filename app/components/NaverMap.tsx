@@ -10,6 +10,7 @@ export default function NaverMap() {
   const { setEvents, events, selectedCategories, selectedStates } = useEventsContext()
   const [naverMap, setNaverMap] = useState<naver.maps.Map | null>(null)
   const [markers, setMarkers] = useState<naver.maps.Marker[]>([])
+  const [center, setCenter] = useState<naver.maps.LatLng | null>(null)
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -18,10 +19,10 @@ export default function NaverMap() {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            ...(!!sessionStorage.getItem('token') ? { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } : {})
           }
         })
         const data = await response.json()
+        console.log('data', data)
         const fetchedEvents: Event[] = data.map((e: Event) => ({  
             ...e,
             isLiked: e.isLiked || false
@@ -36,10 +37,20 @@ export default function NaverMap() {
 
     const initMap = async () => {
       if (typeof window !== 'undefined' && naver && mapRef.current) {
-        const center: naver.maps.LatLng = new naver.maps.LatLng(37.3595704, 127.105399);
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const currentPosition: naver.maps.LatLng = new naver.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            console.log('currentPosition', currentPosition)
+            setCenter(currentPosition)
+          },
+          (error) => {
+            console.error('Error getting current location:', error)
+            setCenter(null)
+          }
+        );
         
         const map: naver.maps.Map = new naver.maps.Map(mapRef.current, {
-          center: center,
+          center: center || new naver.maps.LatLng(36.3705, 127.3541),
           zoom: 16,
           draggable: true,
           pinchZoom: true,
@@ -47,6 +58,7 @@ export default function NaverMap() {
           disableDoubleTapZoom: false,
           disableDoubleClickZoom: false,
         });
+        
         setNaverMap(map)
       }
     }
@@ -54,8 +66,12 @@ export default function NaverMap() {
   }, [])
 
   useEffect(() => {
+    const now = new Date()
+    const isoString = now.toISOString()
+
     events.forEach((event: Event) => {
       if (!naverMap) return;
+      if (event.endAt < isoString) return;
       const marker = new naver.maps.Marker({
         position: new naver.maps.LatLng(event.latitude, event.longitude),
         map: naverMap,
@@ -71,10 +87,29 @@ export default function NaverMap() {
   useEffect(() => {
     const now = new Date()
     const isoString = now.toISOString()
-    markers.forEach((marker: naver.maps.Marker, index: number) => {
-      const e = events[index]
-      if ((selectedCategories.size === 0 || e.categories.some(c => selectedCategories.has(c))) && 
-          (selectedStates.size === 0 || selectedStates.has("upcoming") && e.startAt > isoString || selectedStates.has("ongoing") && e.startAt < isoString)) {
+    
+    // 선택된 카테고리 ID Set 생성 (성능 최적화)
+    const selectedCategoryIds = new Set(Array.from(selectedCategories).map(cat => cat.categoryId))
+    
+    markers.forEach((marker: naver.maps.Marker) => {
+      const eventId = marker.getTitle()
+      const e = events.find(e => e.eventId === Number(eventId))
+      
+      if (!e) {
+        marker.setMap(null)
+        return
+      }
+
+      // 카테고리 필터링
+      const categoryMatch = selectedCategoryIds.size === 0 || 
+        e.Categories.some(category => selectedCategoryIds.has(category.categoryId))
+
+      // 상태 필터링
+      const stateMatch = selectedStates.size === 0 || 
+        (selectedStates.has("upcoming") && e.startAt > isoString) || 
+        (selectedStates.has("ongoing") && e.startAt <= isoString && e.endAt > isoString)
+      
+      if (categoryMatch && stateMatch) {
         marker.setMap(naverMap)
       } else {
         marker.setMap(null)

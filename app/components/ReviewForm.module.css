@@ -1,0 +1,164 @@
+/* 리뷰 작성 폼 */
+.reviewForm {
+  background: #f8f9fa;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.reviewFormHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.reviewFormHeader h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.cancelReviewButton {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.cancelReviewButton:hover {
+  background-color: #e9ecef;
+  color: #333;
+}
+
+.ratingSection {
+  margin-bottom: 16px;
+}
+
+.ratingLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.starsContainer {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  font-size: 20px;
+  transition: all 0.2s;
+}
+
+.starFilled {
+  color: #ffc107;
+}
+
+.starEmpty {
+  color: #e1e5e9;
+}
+
+.star.interactive:hover {
+  transform: scale(1.1);
+}
+
+.contentSection {
+  margin-bottom: 16px;
+}
+
+.contentLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.reviewTextarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.2s;
+}
+
+.reviewTextarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.reviewFormButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.submitReviewButton {
+  background: #F16767;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitReviewButton:hover:not(:disabled) {
+  background: #e55a5a;
+}
+
+.submitReviewButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .reviewForm {
+    background: #2d2d2d;
+    border-color: #404040;
+  }
+
+  .reviewFormHeader h4 {
+    color: #fff;
+  }
+
+  .ratingLabel,
+  .contentLabel {
+    color: #fff;
+  }
+
+  .reviewTextarea {
+    background: #404040;
+    border-color: #555555;
+    color: #fff;
+  }
+
+  .reviewTextarea:focus {
+    border-color: #007bff;
+  }
+
+  .cancelReviewButton {
+    color: #ccc;
+  }
+
+  .cancelReviewButton:hover {
+    background-color: #404040;
+    color: #fff;
+  }
+} 
