@@ -181,7 +181,7 @@ export default function MyPage() {
                   <div className={styles.eventInfo}>
                     <h3 className={styles.eventTitle}>{event.title}</h3>
                     <p className={styles.eventDate}>
-                      📅 {formatDate(event.startAt)} ~ {formatDate(event.endAt)}
+                      {formatDate(event.startAt)} ~ {formatDate(event.endAt)}
                     </p>
                   </div>
                 </div>
@@ -228,7 +228,7 @@ export default function MyPage() {
                   <div className={styles.eventInfo}>
                     <h3 className={styles.eventTitle}>{event.title}</h3>
                     <p className={styles.eventDate}>
-                      📅 {formatDate(event.startAt)} ~ {formatDate(event.endAt)}
+                      {formatDate(event.startAt)} ~ {formatDate(event.endAt)}
                     </p>
                   </div>
                 </div>
