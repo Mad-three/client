@@ -2,13 +2,19 @@
 
 import { useState } from 'react'
 import { Category, useEventsContext } from '../contexts/EventsContext'
+import { usePanelContext } from '../contexts/PanelContext'
 import styles from './DefaultPanel.module.css'
+import { Event } from '../contexts/EventsContext'
 
 export default function DefaultPanel() {
   const { categories, selectedCategories, addSelectedCategory, removeSelectedCategory, setSelectedCategories,
     selectedStates, addSelectedState, removeSelectedState, setSelectedStates } = useEventsContext()
+  const { openPanel } = usePanelContext()
   // 검색어 상태
   const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<Event[]>([])
+  const [showSearchResults, setShowSearchResults] = useState(false)
+  const [isSearching, setIsSearching] = useState(false)
 
   // 검색어 변경 핸들러
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,25 +23,34 @@ export default function DefaultPanel() {
 
   // 검색 실행 함수
   const executeSearch = async () => {
-    const query = searchQuery.trim()
-    if (query) {
-      try {
-        console.log('searchQuery:', query)
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/search?query=${query}`, {
-          method: 'GET',
-        })
-        if (response.ok) {
-          const data = await response.json()
-          console.log(data)
-        } else {
-          const data = await response.json()
-          console.log(data)
+    if (!searchQuery.trim()) {
+      setShowSearchResults(false)
+      return
+    }
+
+    setIsSearching(true)
+    setShowSearchResults(true)
+
+    try {
+      const query = searchQuery.trim()
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/search?query=${query}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
         }
-      } catch (error) {
-        console.error('검색 중 오류 발생:', error)
+      })
+      
+      if (response.ok) {
+        const data = await response.json()
+        setSearchResults(data.events)
+      } else {
+        setSearchResults([])
       }
-    } else {
-      console.log('검색어가 입력되지 않았습니다.')
+    } catch (error) {
+      console.error('검색 오류:', error)
+      setSearchResults([])
+    } finally {
+      setIsSearching(false)
     }
   }
 
@@ -44,6 +59,17 @@ export default function DefaultPanel() {
     if (e.key === 'Enter') {
       executeSearch()
     }
+  }
+
+  // 검색 결과 클릭 핸들러
+  const handleSearchResultClick = (eventId: number) => {
+    setShowSearchResults(false)
+    openPanel(eventId)
+  }
+
+  // 검색창 외부 클릭 시 결과 숨기기
+  const handleClickOutside = () => {
+    setShowSearchResults(false)
   }
 
   // 이벤트 상태 체크박스 변경 핸들러
@@ -106,6 +132,48 @@ export default function DefaultPanel() {
               🔍
             </button>
           </div>
+          
+          {/* 검색 결과 Overlay */}
+          {showSearchResults && (
+            <div className={styles.searchResultsOverlay}>
+              {isSearching ? (
+                <div className={styles.searchLoading}>
+                  <div className={styles.spinner}></div>
+                  <span>검색 중...</span>
+                </div>
+              ) : searchResults.length > 0 ? (
+                <div className={styles.searchResultsList}>
+                  {searchResults.map((result) => (
+                    <div
+                      key={result.eventId}
+                      className={styles.searchResultItem}
+                      onClick={() => handleSearchResultClick(result.eventId)}
+                    >
+                      <div className={styles.searchResultTitle}>
+                        {result.title}
+                      </div>
+                      <div className={styles.searchResultInfo}>
+                        <span className={styles.searchResultDate}>
+                          {new Date(result.startAt).toLocaleDateString()} ~ {new Date(result.endAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <div className={styles.searchResultCategories}>
+                        {result.Categories.map((category: Category) => (
+                          <span key={category.categoryId} className={styles.searchResultCategory}>
+                            {category.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.searchNoResults}>
+                  검색 결과가 없습니다.
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
 

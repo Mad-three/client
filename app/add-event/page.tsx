@@ -183,9 +183,9 @@ export default function AddEventPage() {
       submitData.append('latitude', formData.latitude.toString());
       submitData.append('longitude', formData.longitude.toString());
 
-      /*if (formData.image) {
+      if (formData.image) {
         submitData.append('imageUrl', formData.image)
-      }*/
+      }
 
       // API 호출 (임시로 console.log)
       console.log('이벤트 데이터:', {

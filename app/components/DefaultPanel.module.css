@@ -66,6 +66,113 @@
     border-left: 3px solid #007bff;
 }
 
+/* 검색 결과 Overlay */
+.searchResultsOverlay {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 4px;
+}
+
+.searchLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #666;
+    gap: 8px;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #F16767;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.searchResultsList {
+    padding: 8px 0;
+}
+
+.searchResultItem {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.searchResultItem:last-child {
+    border-bottom: none;
+}
+
+.searchResultItem:hover {
+    background-color: #f8f9fa;
+}
+
+.searchResultTitle {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.searchResultInfo {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.searchResultLocation,
+.searchResultDate {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.searchResultCategories {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.searchResultCategory {
+    background: #F16767;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.searchNoResults {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+/* 검색 컨테이너에 상대 위치 설정 */
+.searchContainer {
+    position: relative;
+}
+
 /* 섹션 */
 .section {
     padding: 1rem;
