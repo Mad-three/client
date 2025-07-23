@@ -84,8 +84,8 @@ export default function MyPage() {
 
   const handleLogout = () => {
     if (confirm('정말 로그아웃하시겠습니까?')) {
-      handleLogout()
-      router.push('/')
+      sessionStorage.removeItem('token')
+      router.replace('/')
     }
   }
 
@@ -101,9 +101,9 @@ export default function MyPage() {
   }
 
   const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <span key={index} className={index < rating ? styles.starFilled : styles.starEmpty}>
-        ★
+    return Array.from({ length: rating }, (_, index) => (
+      <span key={index}>
+        ⭐
       </span>
     ))
   }
@@ -205,7 +205,6 @@ export default function MyPage() {
                   <div className={styles.reviewHeader}>
                     <div className={styles.reviewRating}>
                       {renderStars(review.rating)}
-                      <span className={styles.ratingText}>{review.rating}/5</span>
                     </div>
                   </div>
                   <p className={styles.reviewContent}>{review.content}</p>
