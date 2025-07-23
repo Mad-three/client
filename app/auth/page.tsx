@@ -2,17 +2,29 @@
 import { useSearchParams } from "next/navigation";
 import { validateState } from "../utils/auth";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
-export default function Auth() {
+// 동적 렌더링 설정
+export const dynamic = 'force-dynamic';
+
+function AuthContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isValid, setIsValid] = useState(false);
-  const code = searchParams.get('code') || '';
-  const state = searchParams.get('state') || '';
+  const [code, setCode] = useState('');
+  const [state, setState] = useState('');
+
+  useEffect(() => {
+    // searchParams를 useEffect 내에서 안전하게 처리
+    setCode(searchParams.get('code') || '');
+    setState(searchParams.get('state') || '');
+  }, [searchParams]);
   
   useEffect(() => {
-  const originalState = sessionStorage.getItem('state') || '';
+    // code와 state가 설정된 후에만 실행
+    if (!code || !state) return;
+
+    const originalState = sessionStorage.getItem('state') || '';
     sessionStorage.removeItem('state');
     console.log('originalState', originalState);
 
@@ -58,11 +70,19 @@ export default function Auth() {
   }
 
     handleCallback();
-  }, [router]);
+  }, [router, code, state]);
 
   if (!isValid) {
     return <div>유효하지 않은 요청입니다.</div>;
   }
 
   return <div>로그인 중이에요...</div>;
+}
+
+export default function Auth() {
+  return (
+    <Suspense fallback={<div>로딩 중...</div>}>
+      <AuthContent />
+    </Suspense>
+  );
 }
