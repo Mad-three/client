@@ -23,18 +23,15 @@
 
 .cancelReviewButton {
   background: none;
-  border: none;
-  font-size: 18px;
+  border: 1px solid #F16767;
   cursor: pointer;
-  color: #666;
-  padding: 4px;
-  border-radius: 4px;
-  transition: all 0.2s;
-}
-
-.cancelReviewButton:hover {
-  background-color: #e9ecef;
-  color: #333;
+  color: #F16767;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .ratingSection {
