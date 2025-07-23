@@ -38,20 +38,20 @@ function AuthContent() {
 
     const handleCallback = async () => {
     try {
-        console.log(code, state);
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/naver/callback`, {
-        method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/naver/callback`, {
+      method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ code, state }),
-        });
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+      });
         
       const data = await response.json();
+      if (!response.ok) {
+        console.log(data);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+        
       const token = data.token;
       const user = data.user;
         
