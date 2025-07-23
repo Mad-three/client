@@ -31,14 +31,6 @@ export default function SidePanel({
           {children || (
             <div className={styles.emptyContent}>
               <p>여기에 콘텐츠를 추가하세요</p>
-              <div className={styles.exampleBox}>
-                <h4 className={styles.exampleTitle}>사용 예시:</h4>
-                <pre className={styles.exampleCode}>
-{`<SidePanel title="내 패널">
-  <div>패널 내용</div>
-</SidePanel>`}
-                </pre>
-              </div>
             </div>
           )}
         </div>

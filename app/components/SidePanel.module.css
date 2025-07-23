@@ -5,7 +5,7 @@
   width: var(--panel-width, 300px);
   height: 100vh;
   background-color: #ffffff;
-  transition: left 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: left 0.3s ease-in-out, box-shadow 0.3s ease-in-out, bottom 0.3s ease-in-out;
   z-index: 1000;
   border: 1px solid #e0e0e0;
   border-left: none;
@@ -74,26 +74,6 @@
   margin-top: 2rem;
 }
 
-.exampleBox {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-.exampleTitle {
-  margin: 0 0 0.5rem 0;
-  font-size: 14px;
-}
-
-.exampleCode {
-  font-size: 12px;
-  color: #666;
-  overflow: auto;
-  margin: 0;
-}
-
 /* 토글 버튼 */
 .toggleButton {
   position: fixed;
@@ -133,4 +113,61 @@
 
 .toggleButton.open .toggleIcon {
   transform: rotate(0deg);
-} 
+}
+
+/* 모바일 반응형 스타일 */
+@media (max-width: 768px) {
+
+  .panel {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: var(--panel-height, 70vh);
+    position: fixed;
+    transition: box-shadow 0.3s ease-in-out, bottom 0.3s ease-in-out;
+    border-right: none;
+  }
+
+  .panel.closed {
+    bottom: calc(var(--panel-height, 70vh) * -1);
+    left: 0;
+  }
+  
+  .panel.open {
+    bottom: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .toggleButton {
+    top: auto;
+    left: 50vw;
+    width: 60px;
+    height: 25px;
+    border-radius: 10px 10px 0 0;
+    transition: bottom 0.3s ease-in-out;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .toggleButton.closed {
+    bottom: 0;
+    left: 50vw;
+  }
+  
+  .toggleButton.open {
+    bottom: var(--panel-height, 70vh);
+    left: 50vw;
+  }
+
+  .toggleButton.closed .toggleIcon {
+    transform: rotate(90deg);
+  }
+  
+  .toggleButton.open .toggleIcon {
+    transform: rotate(270deg);
+  }
+}
