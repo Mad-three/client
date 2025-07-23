@@ -28,13 +28,11 @@ export default function Home() {
           }
         })
         const data = await response.json()
-        console.log(data)
         const categories = data.map((c: Category) => ({
           categoryId: c.categoryId,
           name: c.name
         }))
         setCategories(categories)
-        console.log('categories', categories)
       } catch (error) {
         console.error('Error fetching categories:', error)
       }
